@@ -32,4 +32,5 @@ app.UseSession(); // Включение поддержки сессий.
 
 app.MapRazorPages(); // Настройка маршрутов для Razor Pages.
 
+app.MapControllers();
 app.Run(); // Запуск приложения.

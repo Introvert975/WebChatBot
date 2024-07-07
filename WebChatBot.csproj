@@ -26,7 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controller\JsonController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="data\AnswerList.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Controller\JsonController.cs" />
   </ItemGroup>
 
   <ItemGroup>
