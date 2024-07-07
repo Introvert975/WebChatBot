@@ -12,18 +12,19 @@ namespace WebChatBot.Pages
         public UserMessage Umessage { get; set; } = new("");
         Random random = new Random();
         string LastAnswer = string.Empty;
+        int messageId;
         int x;
         public Xdata UserXlist { get; set; } = new Xdata();
         public List<UnitHistory> History { get; set; } = new List<UnitHistory>();
         SendRabbit SendRabbit = new SendRabbit();
-        ReceiveRabbit ReceiveRabbit = new ReceiveRabbit("localhost", "PreProcessQueue");
+        ReceiveRabbit ReceiveRabbit = new ReceiveRabbit("localhost", "PostProcessQueue");
         public void OnGet()
         {
    
             var login = Request.Cookies["UserLoginCookie"];
             if (login != null) {
                 ReceiveRabbit.ReceiveMessage();
-                ReceiveRabbit.Dispose();
+               
                 var UserHistory = JsonSerializer.Deserialize<Dictionary<string, 
                     List<UnitHistory>>>(System.IO.File.ReadAllText("Data/ChatHistory.json"));
                 if (UserHistory != null)
@@ -86,22 +87,22 @@ namespace WebChatBot.Pages
                              LastAnswer = "Пропишите X";
                          }
                      }
-
+                     */
                      var UserHistory = JsonSerializer.Deserialize<Dictionary<string,
                      List<UnitHistory>>>(System.IO.File.ReadAllText("Data/ChatHistory.json"));
                      if (UserHistory != null)
                      {
                          History = UserHistory[login];
-
+                        messageId = History.Max(id => id.Id) + 1;
                          History.Add(new UnitHistory { quest = Umessage.message, Id = History.Max(id => id.Id) + 1 , answer = LastAnswer});
 
                          UserHistory[login] = History;
                          System.IO.File.WriteAllText("Data/ChatHistory.json", JsonSerializer.Serialize(UserHistory));
                      }
-                    */
                     
-                    SendRabbit.SendMessage(Umessage.message);
-                    SendRabbit.Dispose();
+                    
+                    SendRabbit.SendMessage(Umessage.message, Convert.ToString(messageId));
+                  
                 }
                 return RedirectToPage();
             }

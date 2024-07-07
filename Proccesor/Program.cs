@@ -1,4 +1,5 @@
-﻿class Program
+﻿// See https://aka.ms/new-console-template for more information
+class Program
 {
     static async Task Main()
     {
@@ -6,6 +7,6 @@
         string preProcessQueueName = "ProcessorQueue";
         string processorQueueName = "PostProcessQueue";
 
-        await PostProcessWork.ProcessMessages(preProcessQueueName, processorQueueName);
+        await ProcessorWork.ProcessMessages(preProcessQueueName, processorQueueName);
     }
 }

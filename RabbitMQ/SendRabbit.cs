@@ -1,5 +1,6 @@
 ﻿using RabbitMQ.Client;
 using System.Text;
+using System.Threading.Channels;
 
 namespace WebChatBot.RabbitMQ
 {
@@ -18,11 +19,14 @@ namespace WebChatBot.RabbitMQ
         }
 
         // Метод для отправки сообщения в очередь
-        public void SendMessage(string message)
+        public void SendMessage(string message, string messageId)
         {
+          
             var body = Encoding.UTF8.GetBytes(message);
-            _channel.BasicPublish(exchange: "", routingKey: QueueName, basicProperties: null, body: body);
-            Console.WriteLine($"Sent message: {message}");
+            var props = _channel.CreateBasicProperties();
+            props.MessageId = messageId;
+            _channel.BasicPublish(exchange: "", routingKey: QueueName, basicProperties: props, body: body);
+            Console.WriteLine($"Sent message: {message}, {messageId}");
         }
 
         // Метод для закрытия канала и подключения

@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿class Program
+{
+    static async Task Main()
+    {
+        // Здесь вы можете указать названия очередей
+        string preProcessQueueName = "PreProcessQueue";
+        string processorQueueName = "ProcessorQueue";
+
+        await PreProcessWork.ProcessMessages(preProcessQueueName, processorQueueName);
+    }
+}

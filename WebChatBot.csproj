@@ -9,15 +9,19 @@
   <ItemGroup>
     <Compile Remove="PostProcessor\**" />
     <Compile Remove="PreProcessor\**" />
+    <Compile Remove="Proccesor\**" />
     <Compile Remove="Processor\**" />
     <Content Remove="PostProcessor\**" />
     <Content Remove="PreProcessor\**" />
+    <Content Remove="Proccesor\**" />
     <Content Remove="Processor\**" />
     <EmbeddedResource Remove="PostProcessor\**" />
     <EmbeddedResource Remove="PreProcessor\**" />
+    <EmbeddedResource Remove="Proccesor\**" />
     <EmbeddedResource Remove="Processor\**" />
     <None Remove="PostProcessor\**" />
     <None Remove="PreProcessor\**" />
+    <None Remove="Proccesor\**" />
     <None Remove="Processor\**" />
   </ItemGroup>
 
